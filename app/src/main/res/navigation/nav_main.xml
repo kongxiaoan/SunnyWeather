@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/main_fragment"
+    >
+
+    <fragment
+        android:id="@+id/main_fragment"
+        android:name="com.sunnyweather.android.ui.main.MainFragment"
+        tools:layout="@layout/fragment_view_pager">
+
+        <action
+            android:id="@+id/action_main_fragment_to_picture_fragment"
+            app:destination="@id/picture_fragment"
+            />
+    </fragment>
+    <fragment
+        android:id="@+id/picture_fragment"
+        android:name="com.sunnyweather.android.ui.pisture.PictureFragment"
+        android:label="我是标题"
+        tools:layout="@layout/fragment_picture">
+
+    </fragment>
+</navigation>
