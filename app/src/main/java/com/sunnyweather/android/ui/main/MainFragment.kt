@@ -22,14 +22,19 @@ class MainFragment : Fragment() {
         val mainBinding = FragmentViewPagerBinding.inflate(inflater, container, false)
         val mainNav = mainBinding.mainNav
         val mainVp = mainBinding.mainVp
-
         mainVp.adapter = MainAdapter(this)
-
         NavLayoutMediator(mainVp,mainNav,object :NavLayoutMediator.OnConfigureNavCallback{
             override fun onConfigureNav(nav: NavLayout.Nav, position: Int) {
-//                nav.icon = R.drawable.brvah_sample_footer_loading
             }
-        })
+            override fun navData(): MutableList<NavLayout.Nav> {
+                val list = arrayListOf<NavLayout.Nav>()
+                list.add(NavLayout.Nav(R.drawable.selector_nav_picture,"图片", true))
+                list.add(NavLayout.Nav(R.drawable.selector_nav_picture,"视频", true))
+                list.add(NavLayout.Nav(R.drawable.selector_nav_picture,"音乐", true))
+                list.add(NavLayout.Nav(R.drawable.selector_nav_picture,"我的", false))
+                return list
+            }
+        }).attach()
         return mainBinding.root
     }
 

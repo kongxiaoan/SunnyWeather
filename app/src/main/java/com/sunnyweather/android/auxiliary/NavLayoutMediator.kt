@@ -1,8 +1,13 @@
 package com.sunnyweather.android.auxiliary
 
+import android.graphics.drawable.Drawable
+import android.util.Log
+import androidx.annotation.DrawableRes
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
+import com.sunnyweather.android.R
+import com.sunnyweather.android.SunnyWeatherApplication
 import com.sunnyweather.android.widget.NavLayout
 import org.jetbrains.annotations.NotNull
 import java.lang.ref.WeakReference
@@ -53,7 +58,7 @@ class NavLayoutMediator {
         if (attached) {
             throw IllegalStateException("NavigationMediator is already attached")
         }
-        adapter = viewPager.adapter
+        adapter = viewPager.adapter as RecyclerView.Adapter<*>
         checkNotNull(adapter) { "NavigationMediator attached before ViewPager2 has an " + "adapter" }
         attached = true
         navLayoutOnPageChangeCallback = NavLayoutOnPageChangeCallback(navLayout)
@@ -64,33 +69,44 @@ class NavLayoutMediator {
 
         if (autoRefresh) {
             pageAdapterObserver = PageAdapterObserver()
-            adapter.registerAdapterDataObserver(pageAdapterObserver)
+            adapter?.registerAdapterDataObserver(pageAdapterObserver)
         }
+        populateNavsFromPagerAdapter()
+    }
+
+    fun populateNavsFromPagerAdapter() {
+        this.navLayout.addData(this.onConfigureNavCallback.navData())
     }
 
     class PageAdapterObserver : RecyclerView.AdapterDataObserver() {
         override fun onChanged() {
             super.onChanged()
+            Log.i("PageAdapterObserver","onChanged")
         }
 
         override fun onItemRangeRemoved(positionStart: Int, itemCount: Int) {
             super.onItemRangeRemoved(positionStart, itemCount)
+            Log.i("PageAdapterObserver","onChanged")
         }
 
         override fun onItemRangeMoved(fromPosition: Int, toPosition: Int, itemCount: Int) {
             super.onItemRangeMoved(fromPosition, toPosition, itemCount)
+            Log.i("PageAdapterObserver","onChanged")
         }
 
         override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
             super.onItemRangeInserted(positionStart, itemCount)
+            Log.i("PageAdapterObserver","onChanged")
         }
 
         override fun onItemRangeChanged(positionStart: Int, itemCount: Int) {
             super.onItemRangeChanged(positionStart, itemCount)
+            Log.i("PageAdapterObserver","onChanged")
         }
 
         override fun onItemRangeChanged(positionStart: Int, itemCount: Int, payload: Any?) {
             super.onItemRangeChanged(positionStart, itemCount, payload)
+            Log.i("PageAdapterObserver","onChanged")
         }
     }
 
@@ -98,6 +114,7 @@ class NavLayoutMediator {
     class ViewPagerOnNavSelectedListener(private var viewPager: ViewPager2) :
         NavLayout.OnNavSelectedListener {
         override fun onNavSelected(position: Int) {
+            Log.i("pos", "position = $position")
             viewPager.currentItem = position
         }
     }
@@ -139,5 +156,6 @@ class NavLayoutMediator {
 
     interface OnConfigureNavCallback {
         fun onConfigureNav(nav: NavLayout.Nav, position: Int)
+        fun navData(): MutableList<NavLayout.Nav>
     }
 }
