@@ -61,7 +61,6 @@ class NavLayout : ConstraintLayout {
     private fun bindEvent() {
         adapter.setOnItemClickListener { adapter, view, position ->
             Log.e("pos", "pos = $position")
-            Toast.makeText(context, "fsfdsfdsfsd", Toast.LENGTH_LONG).show()
             checkNotNull(onNavSelectedListener) { "NavLayout.OnNavSelectedListener is null" }
             onNavSelectedListener?.onNavSelected(position)
         }
@@ -116,8 +115,10 @@ class NavLayout : ConstraintLayout {
             navName.text = item.text
             navItem.setBackgroundColor(navBackground)
             if (item.isSelect) {
+                navIv.setColorFilter(selectColor)
                 navName.setTextColor(selectColor)
             } else {
+                navIv.setColorFilter(normalColor)
                 navName.setTextColor(normalColor)
             }
         }

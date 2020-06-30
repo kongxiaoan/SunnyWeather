@@ -1,6 +1,7 @@
 package com.sunnyweather.android.utils
 
 import android.content.Context
+import androidx.fragment.app.Fragment
 import com.sunnyweather.android.logic.dao.PictureRepository
 import com.sunnyweather.android.logic.model.PictureViewModelFactory
 
@@ -16,8 +17,8 @@ import com.sunnyweather.android.logic.model.PictureViewModelFactory
  *    version: 1.0
  */
 object InjectorUtils {
-    fun providerPictureViewModelFactory(context: Context) :PictureViewModelFactory {
-        return PictureViewModelFactory(getPictureRepository(context))
+    fun providerPictureViewModelFactory(context: Fragment) :PictureViewModelFactory {
+        return PictureViewModelFactory(getPictureRepository(context.requireContext()))
     }
 
     private fun getPictureRepository(context: Context): PictureRepository {

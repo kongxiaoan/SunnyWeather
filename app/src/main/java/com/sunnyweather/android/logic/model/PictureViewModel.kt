@@ -1,6 +1,8 @@
 package com.sunnyweather.android.logic.model
 
+import android.graphics.Bitmap
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.sunnyweather.android.logic.dao.PictureRepository
 
@@ -17,6 +19,6 @@ import com.sunnyweather.android.logic.dao.PictureRepository
  */
 //internal 可见性修饰 统一模块中可见
 class PictureViewModel internal constructor(repository: PictureRepository) : ViewModel(){
-//    val pictureView: LiveData<List<String>> = LiveData<arrayListOf<String>()>
-
+    val pictureView: MutableLiveData<List<String>> = repository.getData()
+    val pictureBitmap: LiveData<Bitmap> = repository.getBitmap()
 }

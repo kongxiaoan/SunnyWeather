@@ -17,15 +17,6 @@ import com.sunnyweather.android.logic.dao.PictureRepository
  */
 @Suppress("UNCHECKED_CAST")
 class PictureViewModelFactory(private val repository: PictureRepository): ViewModelProvider.Factory {
-    /**
-     * Creates a new instance of the given `Class`.
-     *
-     *
-     *
-     * @param modelClass a `Class` whose instance is requested
-     * @param <T>        The type parameter for the ViewModel.
-     * @return a newly created ViewModel
-    </T> */
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return PictureViewModel(repository) as T
     }

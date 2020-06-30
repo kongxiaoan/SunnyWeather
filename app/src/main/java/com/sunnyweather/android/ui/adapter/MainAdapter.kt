@@ -3,6 +3,8 @@ package com.sunnyweather.android.ui.adapter
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.sunnyweather.android.ui.main.MainFragment
+import com.sunnyweather.android.ui.mine.MineFragment
+import com.sunnyweather.android.ui.music.MusicFragment
 import com.sunnyweather.android.ui.pisture.PictureFragment
 import com.sunnyweather.android.ui.place.PlaceFragment
 import java.lang.IndexOutOfBoundsException
@@ -20,12 +22,16 @@ import java.lang.IndexOutOfBoundsException
  */
 const val PLACE_INDEX = 0
 const val PICTURE_INDEX = 1
+const val MUSIC_INDEX = 2
+const val MINE_INDEX = 3
 
 class MainAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
 
     private val tabFragmentsCreators: Map<Int, () -> Fragment> = mapOf(
         PLACE_INDEX to { PlaceFragment() },
-        PICTURE_INDEX to { PictureFragment() }
+        PICTURE_INDEX to { PictureFragment() },
+        MUSIC_INDEX to { MusicFragment() },
+        MINE_INDEX to { MineFragment() }
     )
 
     override fun getItemCount() = tabFragmentsCreators.size
